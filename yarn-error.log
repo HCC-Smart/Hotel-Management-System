@@ -1,0 +1,55 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\KCT\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
+
+PATH: 
+  C:\Users\KCT\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\KCT\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Users\KCT\AppData\Local\Android\Sdk\platform-tools;C:\Users\KCT\AppData\Local\Android\Sdk\tools;C:\Users\KCT\AppData\Local\jdk-11.0.2\bin;C:\Users\KCT\AppData\Local\Microsoft\WindowsApps;C:\Users\KCT\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\KCT\AppData\Roaming\npm;C:\src\flutter\bin;C:\Program Files\openlogic-openjdk-jre-8u382-b05-windows-32;C:\Users\KCT\AppData\Local\Android\Sdk\tools;C:\Users\KCT\AppData\Local\Android\Sdk\emulator;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  18.16.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EPERM: operation not permitted, unlink 'C:\Users\KCT\Desktop\Node-Project-Three-Authentication-yaasiin-axmed\node_modules\bcrypt\lib\binding\napi-v3\bcrypt_lib.node'
+
+npm manifest: 
+  {
+    "name": "node_project_two_prisma",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+      "start": "nodemon index.js",
+      "db-push": "npx prisma db push",
+      "studio": "npx prisma studio",
+      "prisma-migrate": "npx prisma migrate dev",
+      "seed": "node prisma/seed.js"
+    },
+    "author": "Duraan",
+    "license": "ISC",
+    "devDependencies": {
+      "nodemon": "^3.0.1",
+      "prisma": "^5.4.1"
+    },
+    "dependencies": {
+      "@prisma/client": "^5.3.1",
+      "bcrypt": "^5.1.1",
+      "dotenv": "^16.3.1",
+      "express": "^4.18.2",
+      "jsonwebtoken": "^9.0.2"
+    },
+    "engines": {
+      "node": ">=14.20.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
