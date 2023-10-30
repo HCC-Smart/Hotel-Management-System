@@ -1,4 +1,4 @@
-// Setup Sign up and Login API for Owner
+// Setup Sign up and Login API for admin
 import express from 'express'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
@@ -25,7 +25,7 @@ router.post('/signup', async (req, res) => {
 
         const hashePassword = await bcrypt.hash(password, 10)
 
-        const newOwner = await Admin.save({
+        const newOwner = await Admin.create({
             data: {
                 name: name,
                 email: email,
@@ -45,7 +45,7 @@ router.post("/login", async (req, res) => {
 
     try {
         
-        const existingOwner = await Admin.find({
+        const existingOwner = await Admin.findOne({
             where: {
                 email: email
             }

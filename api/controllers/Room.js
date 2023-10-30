@@ -5,7 +5,7 @@ const app = express.Router();
 
 // Routes for Rooms
 // GET all rooms
-app.get('/rooms', async (req, res) => {
+app.get('/get-rooms', async (req, res) => {
     try {
       const rooms = await Room.find();
       res.json(rooms);
@@ -15,7 +15,7 @@ app.get('/rooms', async (req, res) => {
   });
   
   // POST new room
-  app.post('/rooms', async (req, res) => {
+  app.post('/create-room', async (req, res) => {
     try {
       const room = await Room.create(req.body);
       res.json(room);
@@ -25,7 +25,7 @@ app.get('/rooms', async (req, res) => {
   });
   
   // UPDATE room by ID
-  app.put('/rooms/:id', async (req, res) => {
+  app.put('/:id', async (req, res) => {
     try {
       const { id } = req.params;
       const room = await Room.findByIdAndUpdate(id, req.body, { new: true });
@@ -36,7 +36,7 @@ app.get('/rooms', async (req, res) => {
   });
   
   // DELETE room by ID
-  app.delete('/rooms/:id', async (req, res) => {
+  app.delete('/:id', async (req, res) => {
     try {
       const { id } = req.params;
       await Room.findByIdAndDelete(id);
