@@ -39,6 +39,8 @@ app.get('/:_id/checkAvailability', async (req, res) => {
     res.status(500).json({ message: 'Error checking room availability' });
   }
 });
+
+export default app
 // Usage example
 // const roomId = '60f9e1b35e8f2b001f8a2a7d'; // ID of the room you want to check
 // const startDate = new Date('2023-10-29');
