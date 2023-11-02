@@ -1,28 +1,33 @@
-userId
-roomNumber
-startDate
-endDate
 import express from "express";
 import prisma from "../api/lib/index.js"
-import { authenticate } from "../api/middleware/authenticate.js";
+import { userAuth } from "../api/middleware/authenticate.js";
 
 const app = express.Router();
 
-app.post("/create", authenticate, async (req, res) => {
+// userId
+// roomNumber
+// startDate
+// endDate
+// 2023-10-26T09:30:00Z
+
+app.post("/create", userAuth, async (req, res) => {
+    const userId = req.user.id
     
-    const { roomNum, hotelId} = req.body
+    const {roomId, startDate, endDate, } = req.body
     try{
-        const NewRoom = await prisma.room.create({
+        const NewBooking = await prisma.booking.create({
             data:{
-                roomNum: roomNum,
-                hotelId: hotelId
+                roomId: roomId,
+                startDate: startDate,
+                endDate: endDate,
+                userId: userId
             }
-
+            
         })
-
+        
         return res.status(201).json({
-            mesage: "room created successfully",
-            NewRoom: NewRoom
+            mesage: "Booking created successfully",
+            NewBooking: NewBooking
         })
     }catch(err){
         return res.status(500).json({
@@ -38,8 +43,8 @@ app.post("/create", authenticate, async (req, res) => {
 //Get rooms
 app.get('/', async (req, res) => {
     try {
-      const rooms = await prisma.room.findMany();
-      res.json(rooms);
+      const Booking = await prisma.booking.findMany();
+      res.json(Booking);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -49,13 +54,13 @@ app.get('/', async (req, res) => {
     app.get('/:id', async (req, res) => {
         try {
             const id = parseInt(req.params.id);
-            const room = await prisma.room.findUnique({
+            const booking = await prisma.booking.findUnique({
                 where:{
                     id: id
                 }
             });
           res.json({
-            room: room,
+            booking: booking,
         });
         } catch (error) {
           res.status(400).json({
@@ -66,22 +71,25 @@ app.get('/', async (req, res) => {
 
 
       
-      // PUT update room by ID
-      app.put("/:id", authenticate, async (req, res) => {
-        const rmId = parseInt(req.params.id);
-        const { roomNum, hotelId } = req.body;
+      // PUT update booking by ID
+      app.put("/:id", userAuth, async (req, res) => {
+        const bkId = parseInt(req.params.id);
+        const userId = req.user.id
+        const {roomNumber, startDate, endDate, } = req.body
         try {
-          const updateHotel = await prisma.room.update({
-            where: { id: rmId },
+          const updateBooking = await prisma.booking.update({
+            where: { id: bkId },
             data: {
-                roomNum: roomNum,
-                hotelId: hotelId
+                roomNumber: roomNumber,
+                startDate: startDate,
+                endDate: endDate,
+                userId: userId
             },
           });
       
           return res.status(200).json({
-            message: "Hotel updated successfully",
-            hotel: updateHotel,
+            message: "booking updated successfully",
+            booking: updateBooking,
           });
         } catch (err) {
           return res.status(500).json({
@@ -91,8 +99,5 @@ app.get('/', async (req, res) => {
         }
       });
   
-
-
-
 
 export default app

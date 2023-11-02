@@ -27,14 +27,15 @@ model User {
 }
 
 model Booking {
-  id         Int      @id @default(autoincrement())
-  user       User     @relation(fields: [userId], references: [id])
-  userId     Int
-  roomNumber Int
-  startDate  DateTime
-  endDate    DateTime
-  created    DateTime @default(now())
-  updated    DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  roomId    Int
+  startDate DateTime
+  endDate   DateTime
+  created   DateTime @default(now())
+  updated   DateTime @default(now())
+  Room      Room     @relation(fields: [roomId], references: [id])
 }
 
 model Hotel {
@@ -49,9 +50,8 @@ model Hotel {
 }
 
 model Room {
-  id      Int @id @default(autoincrement())
+  id      Int       @id @default(autoincrement())
   hotelId Int
-  roomNum Int
-
-  Hotel   Hotel @relation(fields: [hotelId], references: [id])
+  booking Booking[]
+  Hotel   Hotel     @relation(fields: [hotelId], references: [id])
 }
