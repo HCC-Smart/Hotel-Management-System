@@ -30,7 +30,7 @@ model Booking {
   id         Int      @id @default(autoincrement())
   user       User     @relation(fields: [userId], references: [id])
   userId     Int
-  roomNumber String
+  roomNumber Int
   startDate  DateTime
   endDate    DateTime
   created    DateTime @default(now())

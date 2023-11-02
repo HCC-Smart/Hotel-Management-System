@@ -150,7 +150,6 @@ router.put('/update', userAuth, async (req, res) => {
   
   router.get('/curentuser', userAuth,  async (req, res) => {
     const userId = req.user.id;
-
     try {
       const user = await prisma.user.findUnique({
         where: { id: userId },
