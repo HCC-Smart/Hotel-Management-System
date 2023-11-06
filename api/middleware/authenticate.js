@@ -7,7 +7,7 @@ export const authenticate = (req, res, next) => {
     const token = req.headers.authorization
 
     if(!token) {
-        return res.status(401).json({status: 401, message: "Authentication failed - missing token"})
+        return res.status(401).json({status: 401, message: "Admin Authentication failed - missing token"})
     }
 
     console.log("token", token)
@@ -16,7 +16,7 @@ export const authenticate = (req, res, next) => {
 
     jwt.verify(tokenWithoutBearar, SECTRET_KEY, (error, admin) => {
         if(error) {
-            return res.status(401).json({status: 401, message: "Authentication failed - missing token"})
+            return res.status(401).json({status: 401, message: "Admin Authentication failed - missing token"})
         }
 
         req.admin = admin
@@ -30,7 +30,7 @@ export const userAuth = (req, res, next) => {
     const token = req.headers.authorization
 
     if(!token) {
-        return res.status(401).json({status: 401, message: "Authentication failed - missing token"})
+        return res.status(401).json({status: 401, message: "User Authentication failed - missing token"})
     }
 
     console.log("token", token)
@@ -39,7 +39,7 @@ export const userAuth = (req, res, next) => {
 
     jwt.verify(tokenWithoutBearar, SECTRET_KEY, (error, user) => {
         if(error) {
-            return res.status(401).json({status: 401, message: "Authentication failed - missing token"})
+            return res.status(401).json({status: 401, message: "User Authentication failed - missing token"})
         }
 
         req.user = user

@@ -51,6 +51,8 @@ model Hotel {
 
 model Room {
   id      Int       @id @default(autoincrement())
+  type    String
+  perNight  Int
   hotelId Int
   booking Booking[]
   Hotel   Hotel     @relation(fields: [hotelId], references: [id])
