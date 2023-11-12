@@ -150,7 +150,7 @@ router.delete('/delate', authenticate, async (req, res) => {
 
 
 
-router.get('/curent-admin', authenticate, async (req, res) => {
+router.get('/current-admin', authenticate, async (req, res) => {
   const adminId = req.admin.id;
 
   try {

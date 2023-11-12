@@ -150,7 +150,7 @@ router.delete('/delate', userAuth, async (req, res) => {
 
 
 
-router.get('/curent-user', userAuth, async (req, res) => {
+router.get('/current-user', userAuth, async (req, res) => {
   const userId = req.user.id;
   try {
     const user = await prisma.user.findUnique({
@@ -158,7 +158,6 @@ router.get('/curent-user', userAuth, async (req, res) => {
       select: {
         id: true,
         name: true,
-
         email: true,
       },
     });
