@@ -6,12 +6,11 @@ const app = express.Router();
 
 app.post("/create-room", authenticate, async (req, res) => {
     
-    const { roomNum, type, perNight, hotelId} = req.body
+    const { RoomType, perNight, hotelId} = req.body
     try{
         const NewRoom = await prisma.room.create({
             data:{
-                roomNum: roomNum,
-                type: type,
+              RoomType:RoomType,
                 perNight: perNight,
                 hotelId: hotelId
             }
@@ -61,24 +60,21 @@ app.get('/', async (req, res) => {
             });
         }
       });
-
-
       
       // PUT update room by ID
       app.put("/:id", authenticate, async (req, res) => {
         const rmId = parseInt(req.params.id);
-        const { roomNum,type, perNight, hotelId } = req.body;
+        const {RoomType, perNight, hotelId } = req.body;
         try {
           const updateHotel = await prisma.room.update({
             where: { id: rmId },
             data: {
-                roomNum: roomNum,
-                type: type,
+              
+              RoomType:RoomType,
                 perNight: perNight,
                 hotelId: hotelId
             },
           });
-      
           return res.status(200).json({
             message: "room updated successfully",
             hotel: updateHotel,

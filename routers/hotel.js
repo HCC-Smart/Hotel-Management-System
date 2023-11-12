@@ -16,7 +16,6 @@ app.post("/", authenticate, async (req, res) => {
             }
 
         })
-
         return res.status(201).json({
             mesage: "Hotel creation successfully",
             NewHotel: NewHotel

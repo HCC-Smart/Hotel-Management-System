@@ -43,7 +43,6 @@ export const userAuth = (req, res, next) => {
         }
 
         req.user = user
-
         next()
     })
 
