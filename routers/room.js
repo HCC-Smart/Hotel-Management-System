@@ -4,13 +4,14 @@ import { authenticate } from "../api/middleware/authenticate.js";
 
 const app = express.Router();
 
-app.post("/create", authenticate, async (req, res) => {
+app.post("/create-room", authenticate, async (req, res) => {
     
-    const { roomNum, hotelId} = req.body
+    const { RoomType, perNight, hotelId} = req.body
     try{
         const NewRoom = await prisma.room.create({
             data:{
-                roomNum: roomNum,
+              RoomType:RoomType,
+                perNight: perNight,
                 hotelId: hotelId
             }
 
@@ -59,24 +60,23 @@ app.get('/', async (req, res) => {
             });
         }
       });
-
-
       
       // PUT update room by ID
       app.put("/:id", authenticate, async (req, res) => {
         const rmId = parseInt(req.params.id);
-        const { roomNum, hotelId } = req.body;
+        const {RoomType, perNight, hotelId } = req.body;
         try {
           const updateHotel = await prisma.room.update({
             where: { id: rmId },
             data: {
-                roomNum: roomNum,
+              
+              RoomType:RoomType,
+                perNight: perNight,
                 hotelId: hotelId
             },
           });
-      
           return res.status(200).json({
-            message: "Hotel updated successfully",
+            message: "room updated successfully",
             hotel: updateHotel,
           });
         } catch (err) {
@@ -87,7 +87,30 @@ app.get('/', async (req, res) => {
         }
       });
   
-
+      //room delete by Id
+      app.delete("/:id", authenticate, async (req, res) => {
+        const roomId = parseInt(req.params.id);
+        try {
+          const deleteRoom = await prisma.room.delete({
+            where: { id: roomId },
+          });
+          if (!deleteRoom) {
+            return res.status(404).json({
+              message: "admin was not found",
+            });
+          }
+      
+          return res.status(200).json({
+            message: "room deleted successfully",
+          });
+        } catch (err) {
+          return res.status(500).json({
+            message: "something went wrong",
+            error: err.message,
+          });
+        }
+      });
+      
 
 
 

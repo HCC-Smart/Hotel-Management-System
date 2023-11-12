@@ -40,7 +40,7 @@ app.post("/create", userAuth, async (req, res) => {
 })
 
 
-//Get rooms
+//Get booking
 app.get('/', async (req, res) => {
     try {
       const Booking = await prisma.booking.findMany();
@@ -50,7 +50,7 @@ app.get('/', async (req, res) => {
     }
   });
 
-    // GET room by ID
+    // GET booking by ID
     app.get('/:id', async (req, res) => {
         try {
             const id = parseInt(req.params.id);
@@ -86,7 +86,7 @@ app.get('/', async (req, res) => {
                 userId: userId
             },
           });
-      
+          
           return res.status(200).json({
             message: "booking updated successfully",
             booking: updateBooking,
@@ -99,5 +99,29 @@ app.get('/', async (req, res) => {
         }
       });
   
+      //delete booking by id
+      app.delete("/:id", userAuth, async (req, res) => {
+        const BookingId = parseInt(req.params.id);
+        try {
+          const deleteBooking = await prisma.booking.delete({
+            where: { id: BookingId },
+          });
+          if (!deleteBooking) {
+            return res.status(404).json({
+              message: "admin not found",
+            });
+          }
+      
+          return res.status(200).json({
+            message: "your booking deleted successfully",
+          });
+        } catch (err) {
+          return res.status(500).json({
+            message: "something went wrong",
+            error: err.message,
+          });
+        }
+      });
+      
 
 export default app

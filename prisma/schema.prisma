@@ -9,6 +9,7 @@ datasource db {
 
 model Admin {
   id       Int      @id @default(autoincrement())
+  name     String
   email    String   @unique
   password String
   created  DateTime @default(now())
@@ -17,24 +18,25 @@ model Admin {
 }
 
 model User {
-  id       Int       @id @default(autoincrement())
-  email    String    @unique
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
   password String
-  loyalty  Int       @default(0)
-  Booking  Booking[]
-  created  DateTime  @default(now())
-  updated  DateTime  @default(now())
+
+  Booking Booking[]
+  created DateTime  @default(now())
+  updated DateTime  @default(now())
 }
 
 model Booking {
   id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id])
   userId    Int
   roomId    Int
   startDate DateTime
   endDate   DateTime
   created   DateTime @default(now())
   updated   DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
   Room      Room     @relation(fields: [roomId], references: [id])
 }
 
@@ -50,8 +52,11 @@ model Hotel {
 }
 
 model Room {
-  id      Int       @id @default(autoincrement())
-  hotelId Int
-  booking Booking[]
-  Hotel   Hotel     @relation(fields: [hotelId], references: [id])
+  id       Int       @id @default(autoincrement())
+  RoomType String
+  perNight Int
+  hotelId  Int
+  booking  Booking[]
+  Hotel    Hotel     @relation(fields: [hotelId], references: [id])
 }
+
