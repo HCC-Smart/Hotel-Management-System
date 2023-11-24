@@ -10,7 +10,7 @@ const app = express.Router();
 // endDate
 // 2023-10-26T09:30:00Z
 
-app.post("/create", userAuth, async (req, res) => {
+app.post("/create-booking", userAuth, async (req, res) => {
     const userId = req.user.id
     
     const {roomId, startDate, endDate, } = req.body

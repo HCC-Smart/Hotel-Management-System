@@ -207,4 +207,46 @@ router.get('/', async (req, res) => {
 
 
 
+
+///jhh
+
+// POST redeem loyalty points for a user
+router.post('/users/:id/redeem', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { points } = req.body;
+
+    const user = await user.findUnique(id);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    if (user.loyaltyPoints < points) {
+      return res.status(400).json({ error: 'Insufficient loyalty points' });
+    }
+
+    // Calculate the number of free nights based on the redeemed points
+    const freeNights = Math.floor(points / 5);
+
+    if (freeNights > 0) {
+      // Apply the free night logic here
+      // For example, update the user's bookings or provide a voucher for a free night
+      
+      // Example: Increment the user's bookings with free nights
+      user.bookings += freeNights;
+      
+      // Save the updated user
+      await user.save();
+    }
+
+    // Deduct the redeemed points from the user's loyaltyPoints
+    user.loyaltyPoints -= points;
+    await user.save();
+
+    res.json(user);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 export default router;
