@@ -187,57 +187,6 @@ Create a new hotel owned by the authenticated admin.
 ```json
 {
  "status": 200,
-  "message": "Book successFully added"
+  "message": "hotel successFully added"
 }
 ```
-
-### Update book
-
-Update the details of a specific book 
-
-**Endpoint:** `PUT /api/books/:update_book/:id`
-
-#### Request Parameters
-
-| Parameter       | Type    | Required | Description                              |
-| --------------- | ------- | -------- | ---------------------------------------- |
-|`update_book/:id`| integer | Yes      | ID of the book to update.             |
-
-#### Response
-
-```json
-{
-    "status": 200,
-  "message": "book updated successFully"
-}
-```
-
-### Delete book
-
-Delete a specific book
-
-**Endpoint:** `DELETE /api/books/:/delete_book/:id`
-
-#### Request Parameters
-
-| Parameter       | Type    | Required | Description                              |
-| --------------- | ------- | -------- | ---------------------------------------- |
-| `/delete_book/:id`   | integer | Yes      | ID of the book to delete.             |
-
-#### Response
-
-```json
-{
-   "status": 200,
-  "message": "book deleted successFully"
-}
-```
-
-
-Possible error messages:
-
-- `401 Authentication failed - missing token`: The request requires authentication, but the owner is not token 
-- `404 owner already exist`: The owner already exist in the database
-- `404 book not found`: The requested book request does not exist.
-- `404 author not found`: The requested author request does not exist.
-- `404 BookStore was not added`: no books in the store.
